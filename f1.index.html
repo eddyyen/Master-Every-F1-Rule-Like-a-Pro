@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>F1 Rookie Steward | Complete Rules & Regulations Guide</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts: Orbitron & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        f1red: '#ff1801',
+                        f1redDark: '#cc1300',
+                        f1cyan: '#00e5ff',
+                        f1gold: '#ffb800',
+                        f1dark: '#0b0e14',
+                        f1card: '#141822',
+                        f1cardHover: '#1d2331',
+                        f1border: '#2a3245',
+                    },
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS Styles -->
+    <style>
+        body {
+            background-color: #0b0e14;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .racing-font {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.05em;
+        }
+
+        /* Carbon fiber subtle pattern */
+        .carbon-bg {
+            background-image: 
+                radial-gradient(rgba(255, 24, 1, 0.1) 1px, transparent 1px),
+                radial-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0e14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ff1801;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #cc1300;
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(20, 24, 34, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* DRS Wing Flap Dynamic Rotation */
+        .drs-wing-flap {
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-origin: 185px 68px;
+        }
+        .drs-open .drs-wing-flap {
+            transform: rotate(-26deg);
+        }
+
+        /* Touch Control Friendly Inputs */
+        input[type=range] {
+            touch-action: manipulation;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-f1red selection:text-white">
+
+    <!-- NAVIGATION BAR -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-f1border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-3">
+            
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group shrink-0">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 bg-f1red rounded-xl flex items-center justify-center transform -skew-x-12 group-hover:scale-105 transition-transform shadow-lg shadow-f1red/30">
+                    <i class="fa-solid fa-gavel text-white text-base sm:text-lg skew-x-12"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="racing-font font-black text-base sm:text-lg tracking-wider text-white flex items-center gap-1">
+                        F1 <span class="text-f1red">STEWARD</span>
+                    </span>
+                    <span class="text-[9px] sm:text-[10px] text-gray-400 font-semibold uppercase -mt-1 tracking-widest">Rookie Rules Guide</span>
+                </div>
+            </a>
+
+            <!-- Quick Global Search (Desktop) -->
+            <div class="relative flex-1 max-w-sm hidden md:block">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                <input type="text" id="global-search-input" placeholder="Search rules (e.g., Yellow Flag, DRS, Pit Speed)..." oninput="handleGlobalSearch(this.value)" class="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-f1dark/90 border border-f1border text-white placeholder-gray-500 focus:outline-none focus:border-f1red transition-all">
+            </div>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden xl:flex items-center space-x-1 text-xs font-semibold">
+                <a href="#basics" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">Basics</a>
+                <a href="#flags" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">Flags & Safety</a>
+                <a href="#pitstop" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">Pit Rules</a>
+                <a href="#penalties" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors">Penalties</a>
+                <a href="#drs-simulator" class="px-3 py-2 rounded-lg text-f1cyan font-bold hover:bg-f1cyan/10 transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-gauge-high"></i> DRS Simulator
+                </a>
+                <a href="#quiz" class="px-3 py-2 rounded-lg text-f1gold font-bold hover:bg-f1gold/10 transition-colors">Steward Quiz</a>
+            </nav>
+
+            <!-- Mobile Hamburger Toggle (Min 44px Touch Target) -->
+            <button id="mobile-menu-btn" aria-label="Toggle Mobile Menu" class="xl:hidden w-11 h-11 rounded-xl bg-f1card border border-f1border text-gray-300 hover:text-white flex items-center justify-center focus:outline-none active:bg-f1cardHover">
+                <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Drawer Overlay -->
+        <div id="mobile-drawer" class="hidden xl:hidden fixed inset-x-0 top-[64px] bg-f1dark/95 backdrop-blur-xl border-b border-f1border px-4 py-6 shadow-2xl space-y-3 z-40 max-h-[85vh] overflow-y-auto">
+            <div class="mb-4">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                    <input type="text" placeholder="Search rules..." oninput="handleGlobalSearch(this.value)" class="w-full pl-9 pr-4 py-2.5 text-xs rounded-xl bg-f1card border border-f1border text-white placeholder-gray-500 focus:outline-none focus:border-f1red">
+                </div>
+            </div>
+            <a href="#basics" class="mobile-link block p-3 rounded-xl bg-f1card border border-f1border text-xs font-semibold text-gray-200 active:bg-f1red/20">
+                <i class="fa-solid fa-trophy mr-2 text-f1gold"></i> Module 1: Championship & Points
+            </a>
+            <a href="#flags" class="mobile-link block p-3 rounded-xl bg-f1card border border-f1border text-xs font-semibold text-gray-200 active:bg-f1red/20">
+                <i class="fa-solid fa-flag mr-2 text-f1red"></i> Module 2: Flags & Safety Cars
+            </a>
+            <a href="#pitstop" class="mobile-link block p-3 rounded-xl bg-f1card border border-f1border text-xs font-semibold text-gray-200 active:bg-f1red/20">
+                <i class="fa-solid fa-stopwatch mr-2 text-f1cyan"></i> Module 3: Pit Stops & Tyres
+            </a>
+            <a href="#penalties" class="mobile-link block p-3 rounded-xl bg-f1card border border-f1border text-xs font-semibold text-gray-200 active:bg-f1red/20">
+                <i class="fa-solid fa-triangle-exclamation mr-2 text-f1red"></i> Module 4: Track Limits & Penalties
+            </a>
+            <a href="#drs-simulator" class="mobile-link block p-3 rounded-xl bg-f1cyan/10 border border-f1cyan/30 text-xs font-bold text-f1cyan active:bg-f1cyan/20">
+                <i class="fa-solid fa-gauge-high mr-2"></i> Module 5: Interactive DRS Simulator
+            </a>
+            <a href="#quiz" class="mobile-link block p-3 rounded-xl bg-f1gold/10 border border-f1gold/30 text-xs font-bold text-f1gold active:bg-f1gold/20">
+                <i class="fa-solid fa-award mr-2"></i> Module 6: Steward Rules Quiz
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-28 sm:pt-36 pb-16 sm:pb-24 carbon-bg overflow-hidden border-b border-f1border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-f1red/10 border border-f1red/30 text-f1red text-xs font-bold tracking-wider uppercase mb-6 animate-pulse">
+                    <i class="fa-solid fa-shield-halved"></i> FIA FORMULA 1 REGULATIONS MADE EASY
+                </div>
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight mb-6">
+                    Master Every <span class="racing-font text-transparent bg-clip-text bg-gradient-to-r from-f1red via-f1gold to-f1cyan">F1 Rule & Decision</span> Like a Pro
+                </h1>
+                <p class="text-gray-300 text-xs sm:text-base leading-relaxed max-w-2xl mx-auto mb-10">
+                    Why did that driver get a 5-second penalty? How does DRS work? What happens during a Safety Car? Explore interactive tools designed specifically for new fans.
+                </p>
+
+                <!-- 3 Quick Pillar Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+                    <div class="p-5 rounded-2xl glass-panel border border-f1border hover:border-f1red/50 transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-f1red/10 border border-f1red/30 flex items-center justify-center text-f1red text-lg mb-3">
+                            <i class="fa-solid fa-road"></i>
+                        </div>
+                        <div class="racing-font text-2xl font-bold text-white mb-1">305 km</div>
+                        <div class="text-xs font-semibold text-gray-300">Minimum Race Distance</div>
+                        <p class="text-[11px] text-gray-400 mt-2 leading-relaxed">A Grand Prix distance is the fewest laps exceeding 305 km (Monaco exception: ~260 km).</p>
+                    </div>
+
+                    <div class="p-5 rounded-2xl glass-panel border border-f1border hover:border-f1gold/50 transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-f1gold/10 border border-f1gold/30 flex items-center justify-center text-f1gold text-lg mb-3">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div class="racing-font text-2xl font-bold text-white mb-1">2h / 3h</div>
+                        <div class="text-xs font-semibold text-gray-300">Strict Time Limit Window</div>
+                        <p class="text-[11px] text-gray-400 mt-2 leading-relaxed">2 hours maximum active racing time; 3 hours max overall window including Red Flag stoppages.</p>
+                    </div>
+
+                    <div class="p-5 rounded-2xl glass-panel border border-f1border hover:border-f1cyan/50 transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-f1cyan/10 border border-f1cyan/30 flex items-center justify-center text-f1cyan text-lg mb-3">
+                            <i class="fa-solid fa-arrows-spin"></i>
+                        </div>
+                        <div class="racing-font text-2xl font-bold text-white mb-1">2 Compounds</div>
+                        <div class="text-xs font-semibold text-gray-300">Mandatory Dry Tyre Rule</div>
+                        <p class="text-[11px] text-gray-400 mt-2 leading-relaxed">In dry races, every finishing driver MUST use at least two different slick tyre specifications.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODULE 1: CHAMPIONSHIP & POINTS CALCULATOR -->
+    <section id="basics" class="py-16 sm:py-24 bg-f1dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+                <h2 class="text-xs font-bold text-f1red uppercase tracking-widest mb-2">MODULE 01</h2>
+                <p class="racing-font text-2xl sm:text-4xl font-extrabold text-white">Championship & Points System</p>
+                <p class="text-gray-400 text-xs sm:text-sm mt-2">Understand the dual championships and simulate finishing point allocations in real-time.</p>
+            </div>
+
+            <!-- Dual Championship Explanation -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <div class="p-6 sm:p-8 rounded-2xl glass-panel border border-f1border hover:border-f1gold/40 transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 rounded-full bg-f1gold/10 text-f1gold text-xs font-bold border border-f1gold/30">WDC Individual</span>
+                        <i class="fa-solid fa-trophy text-f1gold text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-white mb-2">World Drivers' Championship (WDC)</h3>
+                    <p class="text-xs text-gray-300 leading-relaxed mb-4">
+                        Awarded to the driver who accumulates the highest total points across all Grand Prix events in a season. Drivers compete directly even against their own teammates driving identical machinery.
+                    </p>
+                    <div class="p-3 rounded-xl bg-f1card border border-f1border text-[11px] text-gray-400">
+                        <strong class="text-white">Key Steward Note:</strong> Driver points remain tied to the driver even if they switch teams mid-season.
+                    </div>
+                </div>
+
+                <div class="p-6 sm:p-8 rounded-2xl glass-panel border border-f1border hover:border-f1cyan/40 transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 rounded-full bg-f1cyan/10 text-f1cyan text-xs font-bold border border-f1cyan/30">WCC Team Battle</span>
+                        <i class="fa-solid fa-gears text-f1cyan text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-white mb-2">World Constructors' Championship (WCC)</h3>
+                    <p class="text-xs text-gray-300 leading-relaxed mb-4">
+                        Combines the total points scored by BOTH drivers representing the team. WCC standings directly determine team prize money distribution worth tens of millions of dollars.
+                    </p>
+                    <div class="p-3 rounded-xl bg-f1card border border-f1border text-[11px] text-gray-400">
+                        <strong class="text-white">Key Steward Note:</strong> If a driver is disqualified (DSQ), their points for that race are wiped from WCC totals too.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Points Calculator -->
+            <div class="p-6 sm:p-8 rounded-2xl glass-panel border border-f1border">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6 pb-6 border-b border-f1border">
+                    <div>
+                        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-calculator text-f1red"></i> Interactive Race Points Calculator
+                        </h3>
+                        <p class="text-xs text-gray-400 mt-1">Select finishing position and fastest lap status to test scoring rules:</p>
+                    </div>
+                    <span class="px-3 py-1 rounded-lg bg-f1cyan/10 text-f1cyan text-xs font-bold border border-f1cyan/30">
+                        +1 Fastest Lap Bonus Rule
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <!-- Calculator Inputs -->
+                    <div class="lg:col-span-7 space-y-5">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-300 mb-2">Finish Position (P1 – P20):</label>
+                            <select id="calc-pos" onchange="updatePointsCalc()" class="w-full min-h-[44px] px-4 py-3 rounded-xl bg-f1card border border-f1border text-white text-xs sm:text-sm font-semibold focus:outline-none focus:border-f1red">
+                                <option value="1">P1 (Winner) - 25 pts</option>
+                                <option value="2">P2 (2nd Place) - 18 pts</option>
+                                <option value="3">P3 (3rd Place) - 15 pts</option>
+                                <option value="4">P4 - 12 pts</option>
+                                <option value="5">P5 - 10 pts</option>
+                                <option value="6">P6 - 8 pts</option>
+                                <option value="7">P7 - 6 pts</option>
+                                <option value="8">P8 - 4 pts</option>
+                                <option value="9">P9 - 2 pts</option>
+                                <option value="10">P10 - 1 pt</option>
+                                <option value="11">P11–P20 (No Points)</option>
+                                <option value="0">DNF / DSQ (Did Not Finish / Disqualified)</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center justify-between p-4 rounded-xl bg-f1card border border-f1border">
+                            <div>
+                                <div class="text-xs font-bold text-white">Fastest Lap Bonus Point</div>
+                                <div class="text-[11px] text-gray-400">Driver set the fastest single lap of the race</div>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="calc-fastest" onchange="updatePointsCalc()" class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-f1red"></div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Calculator Result Card -->
+                    <div class="lg:col-span-5 p-6 rounded-2xl bg-f1card border border-f1border text-center">
+                        <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Total Points Awarded</div>
+                        <div id="calc-score" class="racing-font text-5xl font-black text-f1cyan my-2">25</div>
+                        <div id="calc-breakdown" class="text-xs text-gray-300">Position points: 25 pts</div>
+                        <div id="calc-warning" class="mt-4 p-3 rounded-xl bg-f1gold/10 border border-f1gold/30 text-[11px] text-f1gold hidden">
+                            ⚠️ Fastest Lap bonus point is ONLY awarded if the driver finishes in the Top 10 (P1–P10)!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODULE 2: FLAGS & SAFETY PROCEDURES -->
+    <section id="flags" class="py-16 sm:py-24 bg-[#090b10] border-t border-f1border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+                <h2 class="text-xs font-bold text-f1red uppercase tracking-widest mb-2">MODULE 02</h2>
+                <p class="racing-font text-2xl sm:text-4xl font-extrabold text-white">Race Flags & Safety Control</p>
+                <p class="text-gray-400 text-xs sm:text-sm mt-2">Tap any flag to review stewards' commands, penalties, and Safety Car protocols.</p>
+            </div>
+
+            <!-- Flag Selector Grid -->
+            <div class="mb-12">
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-flag text-f1red"></i> Tap a flag to inspect stewards' rule:
+                </h3>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 mb-6" id="flag-buttons">
+                    <!-- Generated via JS -->
+                </div>
+
+                <div id="flag-detail-card" class="glass-panel rounded-2xl p-6 border border-f1border">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- SC vs VSC Comparison Table -->
+            <div class="glass-panel rounded-2xl p-6 sm:p-8 border border-f1border">
+                <h3 class="racing-font text-lg sm:text-xl font-bold text-white mb-6 flex items-center gap-2">
+                    <i class="fa-solid fa-car-side text-f1red"></i> Safety Car (SC) vs Virtual Safety Car (VSC)
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- SC Card -->
+                    <div class="p-6 rounded-xl bg-f1card border border-f1gold/40 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-md bg-f1gold/20 text-f1gold font-bold text-xs">SC (Safety Car)</span>
+                            <i class="fa-solid fa-car text-f1gold text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-white text-sm sm:text-base">Physical Safety Car Deployed</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            Deploys actual vehicle (Mercedes-AMG/Aston Martin) onto track to bunch up the field during serious hazards.
+                        </p>
+                        <ul class="text-xs text-gray-400 space-y-2 pt-2">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-f1gold mt-0.5"></i> All overtaking prohibited. Pace set by SC driver.</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-f1gold mt-0.5"></i> Enables "Cheap Pit Stop" (saves ~10-12 seconds compared to normal race speed pit stop).</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-f1gold mt-0.5"></i> Time gaps between cars compressed to zero at restart.</li>
+                        </ul>
+                    </div>
+
+                    <!-- VSC Card -->
+                    <div class="p-6 rounded-xl bg-f1card border border-f1cyan/40 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-md bg-f1cyan/20 text-f1cyan font-bold text-xs">VSC (Virtual Safety Car)</span>
+                            <i class="fa-solid fa-laptop text-f1cyan text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-white text-sm sm:text-base">Electronic Speed Limitation</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            Used for minor incidents requiring marshals on track for quick cleanup without physical car.
+                        </p>
+                        <ul class="text-xs text-gray-400 space-y-2 pt-2">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-f1cyan mt-0.5"></i> All drivers must reduce speed by ~30% and match Target Delta Time on steering wheel.</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-f1cyan mt-0.5"></i> Existing time gaps between drivers are preserved.</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-f1cyan mt-0.5"></i> Can end abruptly; drivers must react instantly to green flag.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODULE 3: PIT STOPS & TYRE STRATEGY -->
+    <section id="pitstop" class="py-16 sm:py-24 bg-f1dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+                <h2 class="text-xs font-bold text-f1red uppercase tracking-widest mb-2">MODULE 03</h2>
+                <p class="racing-font text-2xl sm:text-4xl font-extrabold text-white">Pit Lane Rules & Tyre Strategy</p>
+                <p class="text-gray-400 text-xs sm:text-sm mt-2">Mandatory pit stops, pit speed limits, and setup freezing under Parc Fermé.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Dry Compound Mandate -->
+                <div class="p-6 rounded-2xl glass-panel border border-f1border flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-f1red/10 border border-f1red/30 flex items-center justify-center text-f1red text-lg mb-4">
+                            <i class="fa-solid fa-circle-dot"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-2">Dry Tyre Compound Mandate</h3>
+                        <p class="text-xs text-gray-300 leading-relaxed mb-4">
+                            In dry weather conditions, every finishing driver **MUST use at least two different dry slick tyre compounds** during the race (e.g. Soft + Medium, or Medium + Hard).
+                        </p>
+                    </div>
+                    <div class="p-3 rounded-xl bg-f1card border border-f1border text-[11px] text-gray-400">
+                        💡 If rain occurs and Intermediate or Wet tyres are used, this two-compound rule is waived.
+                    </div>
+                </div>
+
+                <!-- Pit Lane Speed Limit & Unsafe Release -->
+                <div class="p-6 rounded-2xl glass-panel border border-f1border flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-f1gold/10 border border-f1gold/30 flex items-center justify-center text-f1gold text-lg mb-4">
+                            <i class="fa-solid fa-gauge-simple-high"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-2">Pit Speed & Unsafe Release</h3>
+                        <p class="text-xs text-gray-300 leading-relaxed mb-4">
+                            Pit Lane Speed limit is strictly enforced at **80 km/h** (reduced to **60 km/h** at tight tracks like Monaco). Speeding results in time penalties.<br><br>
+                            **Unsafe Release:** Releasing a car into the path of an oncoming vehicle in pit lane triggers immediate driver/team penalties.
+                        </p>
+                    </div>
+                    <div class="p-3 rounded-xl bg-f1card border border-f1border text-[11px] text-gray-400">
+                        ⚡ Pit Stop Speed: Top crews complete a 4-wheel tire change in under **2.0 seconds**!
+                    </div>
+                </div>
+
+                <!-- Parc Fermé Freeze -->
+                <div class="p-6 rounded-2xl glass-panel border border-f1border flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-f1cyan/10 border border-f1cyan/30 flex items-center justify-center text-f1cyan text-lg mb-4">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-2">Parc Fermé Setup Freeze</h3>
+                        <p class="text-xs text-gray-300 leading-relaxed mb-4">
+                            From the moment cars leave the garage for Qualifying, they enter **Parc Fermé**. Major mechanical setups, suspension tuning, or major component swaps are strictly frozen.
+                        </p>
+                    </div>
+                    <div class="p-3 rounded-xl bg-f1card border border-f1border text-[11px] text-gray-400">
+                        ⚠️ Violation Penalty: Unauthorized setup changes force the car to start from the **Pit Lane**.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODULE 4: TRACK LIMITS & PENALTIES -->
+    <section id="penalties" class="py-16 sm:py-24 bg-[#090b10] border-t border-f1border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+                <h2 class="text-xs font-bold text-f1red uppercase tracking-widest mb-2">MODULE 04</h2>
+                <p class="racing-font text-2xl sm:text-4xl font-extrabold text-white">Track Limits & Stewards Penalty Matrix</p>
+                <p class="text-gray-400 text-xs sm:text-sm mt-2">Simulate track limit infractions and review penalty escalation rules.</p>
+            </div>
+
+            <!-- Interactive Track Limits Counter -->
+            <div class="p-6 sm:p-8 rounded-2xl glass-panel border border-f1border mb-12">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6 pb-6 border-b border-f1border">
+                    <div>
+                        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-road-circle-exclamation text-f1red"></i> Track Limits Violation Simulator
+                        </h3>
+                        <p class="text-xs text-gray-400 mt-1">A violation occurs when ALL FOUR wheels pass over the white line defining track edge.</p>
+                    </div>
+                    <button onclick="resetTrackLimits()" class="min-h-[44px] px-4 py-2 rounded-xl bg-f1card border border-f1border text-xs text-gray-300 hover:text-white transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-right"></i> Reset Simulator
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-6 space-y-4">
+                        <button onclick="addTrackLimitViolation()" class="w-full min-h-[50px] py-3.5 px-4 rounded-xl bg-f1red hover:bg-f1redDark text-white font-bold text-xs sm:text-sm shadow-lg shadow-f1red/30 transition-all flex items-center justify-center gap-2 active:scale-95">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            Simulate Infraction: All 4 Wheels Off Track!
+                        </button>
+                        <p class="text-[11px] text-gray-400 text-center">Tap button to log sequential track limit exceedances.</p>
+                    </div>
+
+                    <div class="lg:col-span-6 p-6 rounded-2xl bg-f1card border border-f1border">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs text-gray-400 font-bold uppercase">Logged Violations</span>
+                            <span id="tl-count-badge" class="racing-font text-2xl font-black text-white">0 Times</span>
+                        </div>
+                        <div id="tl-status-box" class="p-4 rounded-xl bg-f1dark border border-f1border text-xs text-gray-300">
+                            🟢 Track position clean. No white line violations logged.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stewards Penalty Grid -->
+            <h3 class="racing-font text-lg font-bold text-white mb-6">Official Stewards Penalty Directory</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="p-5 rounded-2xl bg-f1card border border-f1border">
+                    <div class="text-f1red font-bold text-xs sm:text-sm mb-2">5-Second Time Penalty</div>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Added to driver's total race time or served during their next pit stop (pit crew must stand stationary for 5s before touching the car).
+                    </p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-f1card border border-f1border">
+                    <div class="text-f1gold font-bold text-xs sm:text-sm mb-2">10-Second Time Penalty</div>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Imposed for severe incidents (e.g. causing a collision or dangerous moving under braking).
+                    </p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-f1card border border-f1border">
+                    <div class="text-f1cyan font-bold text-xs sm:text-sm mb-2">Drive-Through Penalty</div>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Driver must enter pit lane, observe the 80 km/h speed limit, and re-join WITHOUT stopping for tires. Costs ~20–25s.
+                    </p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-f1card border border-f1border">
+                    <div class="text-purple-400 font-bold text-xs sm:text-sm mb-2">10-Second Stop & Go</div>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Driver enters pit lane, stops in penalty box for 10 full seconds without crew working on the car, then resumes.
+                    </p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-f1card border border-f1border">
+                    <div class="text-blue-400 font-bold text-xs sm:text-sm mb-2">Grid Position Penalty</div>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Applied to the driver's starting position for the next race (e.g., 3-grid, 5-grid, or 10-grid drop for engine component limits or crashes).
+                    </p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-f1card border border-f1border">
+                    <div class="text-emerald-400 font-bold text-xs sm:text-sm mb-2">Super Licence Penalty Points</div>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Dangerous driving incurs 1–3 points on Super Licence. Reaching **12 points within a rolling 12-month period triggers an automatic 1-RACE BAN**.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODULE 5: TECHNICAL RULES & INTERACTIVE DRS SIMULATOR -->
+    <section id="drs-simulator" class="py-16 sm:py-24 bg-f1dark border-t border-b border-f1border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-f1cyan/10 border border-f1cyan/30 text-f1cyan text-xs font-bold uppercase mb-3">
+                    <i class="fa-solid fa-gauge-high"></i> INTERACTIVE AERODYNAMIC SIMULATOR
+                </div>
+                <h2 class="racing-font text-2xl sm:text-4xl font-extrabold text-white">DRS (Drag Reduction System) Simulator</h2>
+                <p class="text-gray-400 text-xs sm:text-sm mt-2">Adjust gap, weather, and track zone to watch the rear wing flap open dynamically!</p>
+            </div>
+
+            <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-f1border shadow-2xl">
+                
+                <!-- Interactive Controls Bar -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 pb-8 border-b border-f1border">
+                    
+                    <!-- Control 1: Gap Slider -->
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <label class="text-xs font-bold text-gray-300">Detection Gap (Delta):</label>
+                            <span id="drs-delta-val" class="racing-font text-lg font-black text-f1cyan">0.650s</span>
+                        </div>
+                        <input type="range" id="drs-slider" min="0.100" max="2.000" step="0.025" value="0.650" oninput="updateDRS()" class="w-full h-3 bg-f1card rounded-lg appearance-none cursor-pointer accent-f1cyan">
+                        <div class="flex justify-between text-[10px] text-gray-500 mt-1 font-mono">
+                            <span>0.100s (Tailgating)</span>
+                            <span class="text-f1cyan font-bold">1.000s Limit</span>
+                            <span>2.000s (Far)</span>
+                        </div>
+                    </div>
+
+                    <!-- Control 2: Weather Condition Toggle -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-300 mb-2">Track Weather Condition:</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button id="w-dry-btn" onclick="setWeather('dry')" class="min-h-[44px] py-2 px-3 rounded-xl bg-f1cyan/20 border border-f1cyan text-f1cyan font-bold text-xs">
+                                <i class="fa-solid fa-sun mr-1"></i> Dry Track
+                            </button>
+                            <button id="w-wet-btn" onclick="setWeather('wet')" class="min-h-[44px] py-2 px-3 rounded-xl bg-f1card border border-f1border text-gray-400 font-bold text-xs hover:text-white">
+                                <i class="fa-solid fa-cloud-rain mr-1"></i> Wet Track
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Control 3: Zone Toggle -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-300 mb-2">Current Track Position:</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button id="z-drs-btn" onclick="setZone('drs')" class="min-h-[44px] py-2 px-3 rounded-xl bg-f1cyan/20 border border-f1cyan text-f1cyan font-bold text-xs">
+                                <i class="fa-solid fa-road mr-1"></i> DRS Zone
+                            </button>
+                            <button id="z-normal-btn" onclick="setZone('normal')" class="min-h-[44px] py-2 px-3 rounded-xl bg-f1card border border-f1border text-gray-400 font-bold text-xs hover:text-white">
+                                <i class="fa-solid fa-ban mr-1"></i> Normal Corner
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Graphic Visualizer Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- HUD Status Display -->
+                    <div class="lg:col-span-5 p-6 rounded-2xl bg-f1card border border-f1border space-y-4">
+                        <div id="drs-status-badge" class="px-4 py-3 rounded-xl bg-f1cyan/20 border border-f1cyan/40 text-f1cyan font-bold text-center text-sm tracking-wider flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bolt text-lg"></i>
+                            <span id="drs-status-text">DRS ENABLED</span>
+                        </div>
+
+                        <div class="space-y-2.5 text-xs">
+                            <div class="flex justify-between text-gray-400">
+                                <span>Gap at Detection Point:</span>
+                                <span id="drs-det-result" class="text-f1cyan font-bold">PASS (0.650s ≤ 1.000s)</span>
+                            </div>
+                            <div class="flex justify-between text-gray-400">
+                                <span>Rear Wing Flap Status:</span>
+                                <span id="drs-wing-result" class="text-white font-bold">OPEN (85mm Gap)</span>
+                            </div>
+                            <div class="flex justify-between text-gray-400">
+                                <span>Estimated Drag Reduction:</span>
+                                <span id="drs-drag-result" class="text-f1cyan font-bold">~20% Less Air Resistance</span>
+                            </div>
+                            <div class="flex justify-between text-gray-400">
+                                <span>Straight Top Speed Boost:</span>
+                                <span id="drs-speed-result" class="text-f1cyan font-bold">+10 to +12 km/h Boost</span>
+                            </div>
+                        </div>
+
+                        <div id="drs-explanation" class="p-3.5 rounded-xl bg-f1dark text-[11px] text-gray-300 leading-relaxed border border-f1border">
+                            Car behind is within 1.000 second at Detection Point on a dry track in a designated DRS Zone. Opening flap reduces aerodynamic drag for overtaking!
+                        </div>
+                    </div>
+
+                    <!-- SVG Rear Wing Animation -->
+                    <div id="drs-car-container" class="lg:col-span-7 p-6 sm:p-8 rounded-2xl bg-[#080a0f] border border-f1border flex flex-col items-center justify-center relative overflow-hidden drs-open">
+                        
+                        <div class="relative w-full max-w-xs h-48 flex items-center justify-center">
+                            <svg class="w-full h-full text-gray-300" viewBox="0 0 300 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Main Wing Support Structure -->
+                                <path d="M110 150 L135 85 L185 85 L210 150" stroke="#374151" stroke-width="8" stroke-linecap="round" />
+                                <path d="M60 115 L240 115" stroke="#ff1801" stroke-width="10" stroke-linecap="round" />
+                                
+                                <!-- Main Lower Fixed Element -->
+                                <rect x="50" y="85" width="200" height="14" rx="4" fill="#1f2937" stroke="#374151" stroke-width="2" />
+                                
+                                <!-- Movable Upper DRS Flap -->
+                                <g class="drs-wing-flap">
+                                    <rect x="55" y="62" width="190" height="14" rx="3" fill="#00e5ff" stroke="#00b8cc" stroke-width="2" />
+                                    <text x="120" y="72" font-size="8" fill="#000" font-weight="extrabold">DRS HYDRAULIC FLAP</text>
+                                </g>
+
+                                <!-- Airflow stream lines -->
+                                <path d="M10 68 Q 35 68, 50 68" stroke="#38bdf8" stroke-width="3" stroke-dasharray="4 4" class="animate-pulse" />
+                                <path id="drs-air-path" d="M248 68 Q 270 68, 290 68" stroke="#38bdf8" stroke-width="3" stroke-dasharray="4 4" />
+                            </svg>
+                        </div>
+                        <span class="text-[10px] text-gray-500 mt-2 font-mono">F1 Rear Wing DRS Actuator Dynamics</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODULE 6: INTERACTIVE STEWARD RULES QUIZ -->
+    <section id="quiz" class="py-16 sm:py-24 bg-f1dark">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-xs font-bold text-f1gold uppercase tracking-widest mb-2">MODULE 06</h2>
+                <p class="racing-font text-2xl sm:text-4xl font-extrabold text-white">Steward Decision Rules Quiz</p>
+                <p class="text-gray-400 text-xs sm:text-sm mt-2">Test your knowledge with 5 race situation scenarios and earn your Steward Badge!</p>
+            </div>
+
+            <div id="quiz-card" class="glass-panel p-6 sm:p-10 rounded-3xl border border-f1border shadow-2xl">
+                <!-- Rendered dynamically by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- MODULE 7: SEARCHABLE RULES KNOWLEDGE BASE -->
+    <section id="knowledge-base" class="py-16 sm:py-24 bg-[#090b10] border-t border-f1border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs font-bold text-f1red uppercase tracking-widest mb-2">MODULE 07</h2>
+                <p class="racing-font text-2xl sm:text-4xl font-extrabold text-white">Full Rules Knowledge Base</p>
+                <p class="text-gray-400 text-xs sm:text-sm mt-2">Filter and instant-search all official F1 regulations vocabulary below:</p>
+            </div>
+
+            <div class="max-w-md mx-auto mb-10">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" id="kb-search-input" placeholder="Search keywords (e.g., Blue Flag, Pit Speed)..." oninput="renderKnowledgeBase(this.value)" class="w-full min-h-[44px] pl-11 pr-4 py-3 rounded-xl bg-f1card border border-f1border text-white text-xs sm:text-sm focus:outline-none focus:border-f1red">
+                </div>
+            </div>
+
+            <div id="kb-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Populated dynamically by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#06080c] border-t border-f1border py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex items-center justify-center gap-3 mb-4">
+                <div class="w-8 h-8 bg-f1red rounded-xl flex items-center justify-center transform -skew-x-12">
+                    <i class="fa-solid fa-gavel text-white text-sm skew-x-12"></i>
+                </div>
+                <span class="racing-font font-black text-base text-white">F1 STEWARD GUIDE</span>
+            </div>
+            <p class="text-xs text-gray-500 max-w-md mx-auto mb-4 leading-relaxed">
+                An unofficial educational guide for motorsport fans. Formula 1, F1, and FIA are registered trademarks of Formula One Licensing B.V.
+            </p>
+            <p class="text-xs text-gray-600">
+                &copy; 2026 F1 Rookie Steward Rules & Regulations Hub. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        
+        // 1. FLAGS DATA MODEL
+        const flagsData = [
+            {
+                id: 'yellow',
+                name: 'Yellow Flag',
+                bg: 'bg-yellow-400 text-black',
+                border: 'border-yellow-400',
+                rule: 'Hazard on or near track. Drivers MUST REDUCE SPEED and OVERTAKING IS STRICTLY PROHIBITED. Double Yellows indicate marshals on track; drivers must be prepared to stop.',
+                penalty: 'Overtaking under yellow flags triggers a 5s to 10s penalty + Super Licence points.'
+            },
+            {
+                id: 'green',
+                name: 'Green Flag',
+                bg: 'bg-emerald-500 text-white',
+                border: 'border-emerald-500',
+                rule: 'Track is clear! Danger zone passed. Drivers can resume full racing speed and normal overtaking.',
+                penalty: 'None. Indicates normal racing conditions.'
+            },
+            {
+                id: 'red',
+                name: 'Red Flag',
+                bg: 'bg-f1red text-white',
+                border: 'border-f1red',
+                rule: 'Session SUSPENDED immediately due to severe crash or heavy rain. All drivers must reduce speed and proceed slowly into Pit Lane.',
+                penalty: 'Teams are permitted to change tyres and repair damaged front wings in pit lane during red flag stoppage.'
+            },
+            {
+                id: 'blue',
+                name: 'Blue Flag',
+                bg: 'bg-blue-600 text-white',
+                border: 'border-blue-600',
+                rule: 'Lapping car behind! Lapped/slower car must yield and let the faster lead car pass within 3 marshal posts/corners.',
+                penalty: 'Ignoring 3 consecutive blue flag warnings incurs a 5-second time penalty.'
+            },
+            {
+                id: 'blackwhite',
+                name: 'Black & White Flag',
+                bg: 'bg-gradient-to-br from-black via-gray-700 to-white text-white',
+                border: 'border-gray-400',
+                rule: 'Unsportsmanlike behavior warning (equivalent to a yellow card in football). Issued after 3 track limit exceedances or risky defensive weaving.',
+                penalty: 'Next violation results in an automatic 5-second penalty.'
+            },
+            {
+                id: 'black',
+                name: 'Black Flag',
+                bg: 'bg-black text-f1red border-f1red',
+                border: 'border-f1red',
+                rule: 'Disqualification (DSQ). Driver must return to garage immediately and withdraw from the race.',
+                penalty: 'Forfeits all points earned in the event.'
+            },
+            {
+                id: 'chequered',
+                name: 'Chequered Flag',
+                bg: 'bg-gradient-to-r from-gray-900 via-white to-gray-900 text-black',
+                border: 'border-white',
+                rule: 'Session or race finished! Signifies the end of practice, qualifying, or the Grand Prix.',
+                penalty: 'Drivers must complete in-lap slowly and park cars in Parc Fermé/Pit lane.'
+            },
+            {
+                id: 'slippery',
+                name: 'Yellow & Red Striped',
+                bg: 'bg-amber-500 text-red-950',
+                border: 'border-amber-500',
+                rule: 'Slippery track surface ahead due to oil spill, water accumulation, or debris.',
+                penalty: 'Warns drivers to brake earlier to prevent sliding off track.'
+            }
+        ];
+
+        // 2. KNOWLEDGE BASE SEARCH DATA
+        const kbData = [
+            { title: "DRS (Drag Reduction System)", tag: "AERODYNAMICS", desc: "Rear wing flap opens when car is under 1.000s behind in a DRS Zone, boosting top speed by 10–12 km/h." },
+            { title: "Parc Fermé", tag: "SETUP RULES", desc: "Car setup is frozen from Qualifying onset. Unauthorized changes force a Pit Lane start." },
+            { title: "Track Limits", tag: "RACE CRAFT", desc: "4 wheels off white line = infraction. 3 warnings (Black & White flag), 4th = 5s penalty." },
+            { title: "Unsafe Release", tag: "PIT LANE", desc: "Releasing a pit-stopped car directly into the path of an approaching car in pit lane." },
+            { title: "Virtual Safety Car (VSC)", tag: "SAFETY", desc: "Electronic speed restriction (~30% reduction). Drivers maintain target steering wheel Delta time." },
+            { title: "Safety Car (SC)", tag: "SAFETY", desc: "Physical lead car bunches up the field. No overtaking allowed; enables cheap pit stops." },
+            { title: "Blue Flag", tag: "FLAGS", desc: "Warns a lapped car to yield position to faster lead cars within 3 corners." },
+            { title: "Yellow Flag", tag: "FLAGS", desc: "Hazard ahead. Slow down, no overtaking allowed." },
+            { title: "Five Red Lights", tag: "START RACE", desc: "Race start sequence: 5 lights turn on sequentially and extinguish simultaneously to start race." },
+            { title: "Fastest Lap (+1 Point)", tag: "SCORING", desc: "+1 bonus point awarded to the driver with the fastest lap, provided they finish in top 10 (P1–P10)." },
+            { title: "Super Licence Points", tag: "PENALTIES", desc: "12 penalty points accumulated within 12 months triggers an automatic 1-race suspension." },
+            { title: "Moving Under Braking", tag: "DEFENSE", desc: "Prohibited defensive tactic of altering car line during heavy braking zones." }
+        ];
+
+        // 3. STEWARD SCENARIO QUIZ QUESTIONS
+        const quizQuestions = [
+            {
+                q: "1. During a dry Grand Prix, how many different slick tyre compounds must every driver use?",
+                options: [
+                    "A. They can run the entire race on 1 set without stopping",
+                    "B. At least TWO different dry slick compounds",
+                    "C. They must use all three available dry compounds",
+                    "D. Exactly 4 sets of soft tyres"
+                ],
+                answer: 1,
+                explain: "Correct! In dry races, FIA rules mandate using at least two distinct slick compounds (e.g. Soft & Medium)."
+            },
+            {
+                q: "2. Under what condition is a trailing driver allowed to open their DRS wing flap?",
+                options: [
+                    "A. Anywhere on track whenever they want",
+                    "B. Inside a designated DRS Zone AND within 1.000s behind at Detection Point",
+                    "C. Only when they are 3.000s behind the lead car",
+                    "D. Only on the final lap of the Grand Prix"
+                ],
+                answer: 1,
+                explain: "Correct! DRS requires being within 1.000s of the car ahead at the Detection Point inside a DRS zone."
+            },
+            {
+                q: "3. What must a driver do when shown a Blue Flag?",
+                options: [
+                    "A. Accelerate and aggressively defend their line",
+                    "B. Stop the car on the side of the track immediately",
+                    "C. Allow the faster lapping car to pass within 3 corners",
+                    "D. Enter the pit lane for a mandatory tire change"
+                ],
+                answer: 2,
+                explain: "Correct! A Blue flag orders a lapped car to safely yield racing line to the approaching lead car."
+            },
+            {
+                q: "4. How many Super Licence Penalty Points trigger an automatic 1-RACE BAN?",
+                options: [
+                    "A. 5 Points",
+                    "B. 8 Points",
+                    "C. 12 Points (within a rolling 12 months)",
+                    "D. 20 Points"
+                ],
+                answer: 2,
+                explain: "Correct! Accumulating 12 penalty points on a Super Licence in 12 months results in a 1-race ban."
+            },
+            {
+                q: "5. What penalty is imposed on a driver for exceeding Track Limits for the 4th time in a race?",
+                options: [
+                    "A. Oral warning only",
+                    "B. Disqualification from the race",
+                    "C. 5-Second Time Penalty",
+                    "D. 10-Grid drop penalty"
+                ],
+                answer: 2,
+                explain: "Correct! Infractions 1–2 are logged, 3rd gets Black & White flag, and 4th triggers a 5-second penalty!"
+            }
+        ];
+
+        let trackLimitViolations = 0;
+        let currentQuizIndex = 0;
+        let quizScore = 0;
+
+        // DRS Simulator State
+        let drsState = {
+            gap: 0.650,
+            weather: 'dry', // 'dry' | 'wet'
+            zone: 'drs'     // 'drs' | 'normal'
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderFlagButtons();
+            selectFlag('yellow');
+            updatePointsCalc();
+            renderKnowledgeBase('');
+            renderQuizStep();
+            setupMobileDrawer();
+            updateDRS();
+        });
+
+        // Mobile Drawer Toggle Logic
+        function setupMobileDrawer() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const drawer = document.getElementById('mobile-drawer');
+            btn.addEventListener('click', () => drawer.classList.toggle('hidden'));
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => drawer.classList.add('hidden'));
+            });
+        }
+
+        function renderFlagButtons() {
+            const container = document.getElementById('flag-buttons');
+            container.innerHTML = flagsData.map(f => `
+                <button onclick="selectFlag('${f.id}')" id="flag-btn-${f.id}" class="min-h-[50px] p-2.5 rounded-xl bg-f1card border border-f1border hover:border-f1red text-center transition-all flex flex-col items-center justify-center gap-1.5 active:scale-95">
+                    <div class="w-8 h-5 rounded ${f.bg} border ${f.border} shadow flex items-center justify-center font-black text-[8px] tracking-tighter">FLAG</div>
+                    <span class="text-[11px] font-bold text-gray-200">${f.name.split(' ')[0]}</span>
+                </button>
+            `).join('');
+        }
+
+        function selectFlag(id) {
+            const flag = flagsData.find(f => f.id === id);
+            if (!flag) return;
+
+            document.querySelectorAll('#flag-buttons button').forEach(b => {
+                b.classList.remove('border-f1red', 'bg-f1cardHover');
+            });
+            const activeBtn = document.getElementById(`flag-btn-${id}`);
+            if (activeBtn) activeBtn.classList.add('border-f1red', 'bg-f1cardHover');
+
+            const detailCard = document.getElementById('flag-detail-card');
+            detailCard.innerHTML = `
+                <div class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+                    <div class="w-20 h-12 sm:w-24 sm:h-14 rounded-xl ${flag.bg} border ${flag.border} flex-shrink-0 flex items-center justify-center font-black text-xs shadow-xl tracking-wider">
+                        ${flag.name.toUpperCase()}
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-lg font-bold text-white">${flag.name}</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed"><strong class="text-f1cyan">Rule Mandate:</strong> ${flag.rule}</p>
+                        <p class="text-xs text-gray-400"><strong class="text-f1red">Stewards Penalty:</strong> ${flag.penalty}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updatePointsCalc() {
+            const pos = parseInt(document.getElementById('calc-pos').value);
+            const isFastest = document.getElementById('calc-fastest').checked;
+            
+            const pointsTable = { 1: 25, 2: 18, 3: 15, 4: 12, 5: 10, 6: 8, 7: 6, 8: 4, 9: 2, 10: 1 };
+            
+            let basePts = pointsTable[pos] || 0;
+            let extraPts = 0;
+            let showWarning = false;
+
+            if (isFastest) {
+                if (pos >= 1 && pos <= 10) {
+                    extraPts = 1;
+                } else {
+                    showWarning = true;
+                }
+            }
+
+            const totalPts = basePts + extraPts;
+
+            document.getElementById('calc-score').innerText = totalPts;
+            document.getElementById('calc-breakdown').innerText = `Position Score: ${basePts} pts | Fastest Lap Bonus: ${extraPts} pt`;
+            
+            const warnBox = document.getElementById('calc-warning');
+            if (showWarning) {
+                warnBox.classList.remove('hidden');
+            } else {
+                warnBox.classList.add('hidden');
+            }
+        }
+
+        function addTrackLimitViolation() {
+            trackLimitViolations++;
+            const badge = document.getElementById('tl-count-badge');
+            const box = document.getElementById('tl-status-box');
+
+            badge.innerText = `${trackLimitViolations} Times`;
+
+            if (trackLimitViolations === 1 || trackLimitViolations === 2) {
+                box.className = "p-4 rounded-xl bg-f1gold/10 border border-f1gold/30 text-xs text-f1gold";
+                box.innerHTML = `⚠️ Violation ${trackLimitViolations} logged. Lap time deleted. Steward oral warning logged.`;
+            } else if (trackLimitViolations === 3) {
+                box.className = "p-4 rounded-xl bg-gradient-to-r from-gray-900 to-black border border-gray-400 text-xs text-white";
+                box.innerHTML = `🏁 Black & White Flag Issued! Final driver warning before mandatory time penalty.`;
+            } else if (trackLimitViolations >= 4) {
+                const seconds = (trackLimitViolations === 4) ? 5 : 5 + (trackLimitViolations - 4) * 5;
+                box.className = "p-4 rounded-xl bg-f1red/20 border border-f1red text-xs text-f1red font-bold";
+                box.innerHTML = `🚨 ${trackLimitViolations} Violations logged! Stewards Decision: ${seconds}-SECOND TIME PENALTY IMPOSED!`;
+            }
+        }
+
+        function resetTrackLimits() {
+            trackLimitViolations = 0;
+            document.getElementById('tl-count-badge').innerText = `0 Times`;
+            const box = document.getElementById('tl-status-box');
+            box.className = "p-4 rounded-xl bg-f1dark border border-f1border text-xs text-gray-300";
+            box.innerHTML = `🟢 Track position clean. No white line violations logged.`;
+        }
+
+        function setWeather(val) {
+            drsState.weather = val;
+            const dryBtn = document.getElementById('w-dry-btn');
+            const wetBtn = document.getElementById('w-wet-btn');
+
+            if (val === 'dry') {
+                dryBtn.className = "min-h-[44px] py-2 px-3 rounded-xl bg-f1cyan/20 border border-f1cyan text-f1cyan font-bold text-xs";
+                wetBtn.className = "min-h-[44px] py-2 px-3 rounded-xl bg-f1card border border-f1border text-gray-400 font-bold text-xs hover:text-white";
+            } else {
+                wetBtn.className = "min-h-[44px] py-2 px-3 rounded-xl bg-f1red/20 border border-f1red text-f1red font-bold text-xs";
+                dryBtn.className = "min-h-[44px] py-2 px-3 rounded-xl bg-f1card border border-f1border text-gray-400 font-bold text-xs hover:text-white";
+            }
+            updateDRS();
+        }
+
+        function setZone(val) {
+            drsState.zone = val;
+            const drsBtn = document.getElementById('z-drs-btn');
+            const normBtn = document.getElementById('z-normal-btn');
+
+            if (val === 'drs') {
+                drsBtn.className = "min-h-[44px] py-2 px-3 rounded-xl bg-f1cyan/20 border border-f1cyan text-f1cyan font-bold text-xs";
+                normBtn.className = "min-h-[44px] py-2 px-3 rounded-xl bg-f1card border border-f1border text-gray-400 font-bold text-xs hover:text-white";
+            } else {
+                normBtn.className = "min-h-[44px] py-2 px-3 rounded-xl bg-f1card border border-f1border text-white font-bold text-xs";
+                drsBtn.className = "min-h-[44px] py-2 px-3 rounded-xl bg-f1card border border-f1border text-gray-400 font-bold text-xs hover:text-white";
+            }
+            updateDRS();
+        }
+
+        function updateDRS() {
+            const slider = document.getElementById('drs-slider');
+            if (slider) drsState.gap = parseFloat(slider.value);
+
+            document.getElementById('drs-delta-val').innerText = `${drsState.gap.toFixed(3)}s`;
+
+            const isGapOk = drsState.gap <= 1.000;
+            const isDry = drsState.weather === 'dry';
+            const isDRSZone = drsState.zone === 'drs';
+
+            const isDrsEnabled = isGapOk && isDry && isDRSZone;
+
+            const badge = document.getElementById('drs-status-badge');
+            const statusText = document.getElementById('drs-status-text');
+            const detRes = document.getElementById('drs-det-result');
+            const wingRes = document.getElementById('drs-wing-result');
+            const dragRes = document.getElementById('drs-drag-result');
+            const speedRes = document.getElementById('drs-speed-result');
+            const exp = document.getElementById('drs-explanation');
+            const carContainer = document.getElementById('drs-car-container');
+
+            if (isDrsEnabled) {
+                badge.className = "px-4 py-3 rounded-xl bg-f1cyan/20 border border-f1cyan/40 text-f1cyan font-bold text-center text-sm tracking-wider flex items-center justify-center gap-2";
+                statusText.innerText = "DRS ENABLED";
+                detRes.className = "text-f1cyan font-bold";
+                detRes.innerText = `PASS (${drsState.gap.toFixed(3)}s ≤ 1.000s)`;
+                wingRes.className = "text-white font-bold";
+                wingRes.innerText = "OPEN (85mm Gap Flap)";
+                dragRes.className = "text-f1cyan font-bold";
+                dragRes.innerText = "~20% Less Air Resistance";
+                speedRes.className = "text-f1cyan font-bold";
+                speedRes.innerText = "+10 to +12 km/h Boost";
+                exp.innerText = "All conditions met! Trailing car triggers hydraulic actuator to open wing flap, shedding aerodynamic drag for a high-speed overtake!";
+                
+                carContainer.classList.add('drs-open');
+            } else {
+                badge.className = "px-4 py-3 rounded-xl bg-f1red/20 border border-f1red/40 text-f1red font-bold text-center text-sm tracking-wider flex items-center justify-center gap-2";
+                statusText.innerText = "DRS DISABLED";
+                
+                if (!isDry) {
+                    detRes.innerText = "DISABLED (Wet Weather Conditions)";
+                    exp.innerText = "DRS is automatically disabled by Race Control during wet track conditions to maintain rear downforce and stability.";
+                } else if (!isDRSZone) {
+                    detRes.innerText = "DISABLED (Outside DRS Zone)";
+                    exp.innerText = "DRS can only be activated inside designated straight line DRS Activation Zones.";
+                } else {
+                    detRes.innerText = `FAIL (${drsState.gap.toFixed(3)}s > 1.000s)`;
+                    exp.innerText = "Trailing car gap is greater than 1.000 second at Detection Point. DRS activation denied.";
+                }
+
+                detRes.className = "text-f1red font-bold";
+                wingRes.className = "text-gray-400 font-bold";
+                wingRes.innerText = "CLOSED (Downforce Mode)";
+                dragRes.className = "text-gray-400 font-bold";
+                dragRes.innerText = "Standard Drag Level";
+                speedRes.className = "text-gray-400 font-bold";
+                speedRes.innerText = "+0 km/h (No Boost)";
+
+                carContainer.classList.remove('drs-open');
+            }
+        }
+
+        function renderQuizStep() {
+            const card = document.getElementById('quiz-card');
+
+            if (currentQuizIndex >= quizQuestions.length) {
+                let badgeRank = "Rookie Fan 🎟️";
+                if (quizScore === 5) badgeRank = "Chief Race Steward 👑";
+                else if (quizScore >= 3) badgeRank = "Grid Insider 🏁";
+
+                card.innerHTML = `
+                    <div class="text-center space-y-6">
+                        <div class="inline-flex p-4 rounded-full bg-f1gold/10 text-f1gold text-5xl mb-2">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Quiz Completed! Your Steward Rank:</h3>
+                        <h2 class="racing-font text-3xl sm:text-4xl font-black text-f1gold">${badgeRank}</h2>
+                        <div class="text-gray-300 text-sm">Score: <span class="font-bold text-white text-xl">${quizScore}</span> / 5 Correct</div>
+
+                        <button onclick="resetQuiz()" class="min-h-[48px] px-8 py-3 rounded-xl bg-f1red hover:bg-f1redDark text-white font-bold text-xs sm:text-sm shadow-lg transition-all active:scale-95">
+                            <i class="fa-solid fa-rotate-right mr-2"></i>Retake Quiz
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            const q = quizQuestions[currentQuizIndex];
+            card.innerHTML = `
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between text-xs font-bold text-gray-400 border-b border-f1border pb-4">
+                        <span>Question 0${currentQuizIndex + 1} / 05</span>
+                        <span class="text-f1gold">Steward Rules Challenge</span>
+                    </div>
+
+                    <h3 class="text-sm sm:text-base font-bold text-white leading-relaxed">${q.q}</h3>
+
+                    <div class="space-y-3">
+                        ${q.options.map((opt, i) => `
+                            <button onclick="checkAnswer(${i})" class="w-full min-h-[48px] p-4 rounded-xl bg-f1card hover:bg-f1cardHover border border-f1border hover:border-f1red text-left text-xs font-medium text-gray-200 transition-all flex items-center justify-between active:scale-98">
+                                <span>${opt}</span>
+                                <i class="fa-solid fa-circle-chevron-right text-gray-500"></i>
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function checkAnswer(chosenIndex) {
+            const q = quizQuestions[currentQuizIndex];
+            const card = document.getElementById('quiz-card');
+
+            const isCorrect = chosenIndex === q.answer;
+            if (isCorrect) quizScore++;
+
+            card.innerHTML = `
+                <div class="space-y-6">
+                    <div class="p-4 rounded-xl ${isCorrect ? 'bg-f1cyan/10 border border-f1cyan/30 text-f1cyan' : 'bg-f1red/10 border border-f1red/30 text-f1red'} text-xs sm:text-sm font-bold flex items-center gap-2">
+                        <i class="fa-solid ${isCorrect ? 'fa-circle-check' : 'fa-circle-xmark'}"></i>
+                        <span>${isCorrect ? 'Correct Decision, Steward!' : 'Incorrect Decision! Steward Explanation:'}</span>
+                    </div>
+
+                    <p class="text-xs text-gray-300 leading-relaxed p-4 rounded-xl bg-f1card border border-f1border">
+                        ${q.explain}
+                    </p>
+
+                    <button onclick="nextQuestion()" class="w-full min-h-[48px] py-3 rounded-xl bg-f1red hover:bg-f1redDark text-white font-bold text-xs shadow-lg transition-all active:scale-95">
+                        Next Question <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            `;
+        }
+
+        function nextQuestion() {
+            currentQuizIndex++;
+            renderQuizStep();
+        }
+
+        function resetQuiz() {
+            currentQuizIndex = 0;
+            quizScore = 0;
+            renderQuizStep();
+        }
+
+        function renderKnowledgeBase(filterText) {
+            const container = document.getElementById('kb-grid');
+            const query = filterText.toLowerCase();
+
+            const filtered = kbData.filter(item => 
+                item.title.toLowerCase().includes(query) ||
+                item.tag.toLowerCase().includes(query) ||
+                item.desc.toLowerCase().includes(query)
+            );
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-10 text-gray-500 text-xs">No matching rule keywords found. Try another query...</div>`;
+                return;
+            }
+
+            container.innerHTML = filtered.map(item => `
+                <div class="glass-panel p-5 rounded-2xl border border-f1border hover:border-f1red/40 transition-all">
+                    <span class="text-[10px] font-bold text-f1cyan bg-f1cyan/10 px-2 py-0.5 rounded border border-f1cyan/20">${item.tag}</span>
+                    <h4 class="font-bold text-white text-sm sm:text-base mt-2 mb-1">${item.title}</h4>
+                    <p class="text-xs text-gray-300 leading-relaxed">${item.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function handleGlobalSearch(val) {
+            renderKnowledgeBase(val);
+            const kbSec = document.getElementById('knowledge-base');
+            if (val.trim().length > 0 && window.scrollY < 400) {
+                kbSec.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>
